@@ -7,7 +7,7 @@
     ></Header>
     <Loading v-if="validatingToken" />
 
-    <Content></Content>
+    <Content v-else></Content>
     <Footer></Footer>
   </div>
 </template>
