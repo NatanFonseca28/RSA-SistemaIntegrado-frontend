@@ -1,78 +1,78 @@
 <template>
-	<div id="app" :class="{'hide-menu': !isMenuVisible || !user}" >
-		<Header title="SGI - Sistema de Gestão Interna" :hideToggle="!user" :hideUserDropdown="!user"></Header>
-		<Content></Content>
-		<Footer></Footer>
+  <div id="app" :class="{ 'hide-menu': !isMenuVisible || !user }">
+    <Header
+      title="SGI - Sistema de Gestão Interna"
+      :hideToggle="!user"
+      :hideUserDropdown="!user"
+    ></Header>
+    <Loading v-if="validatingToken" />
 
-	</div>
+    <Content></Content>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
-
-import axios from "axios"
-import { baseApiUrl, userKey } from "@/global"
-import { mapState } from 'vuex'
+import axios from "axios";
+import { baseApiUrl, userKey } from "@/global";
+import { mapState } from "vuex";
 import Header from "./components/template/Header";
 import Content from "./components/template/Content";
 import Footer from "./components/template/Footer";
-import Loading from "@/components/template/Loading"
+import Loading from "@/components/template/Loading";
 
+import Vue from "vue";
+import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
+import Vuetify from "vuetify";
 
-import Vue from 'vue'
-import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
-import Vuetify from 'vuetify'
+Vue.use(Vuetify);
 
-Vue.use(Vuetify)
-
-Vue.use(BootstrapVue)
-Vue.use(BootstrapVueIcons)
-
-
+Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
 
 export default {
   name: "App",
   components: { Header, Content, Footer, Loading },
-  computed: mapState(['isMenuVisible', 'user']),
-  data: function() {
-		return {
-			validatingToken: true
-		}
-	},
-	methods: {
-		async validateToken() {
-			this.validatingToken = true
+  computed: mapState(["isMenuVisible", "user"]),
+  data: function () {
+    return {
+      validatingToken: true,
+    };
+  },
+  methods: {
+    async validateToken() {
+      this.validatingToken = true;
 
-			const json = localStorage.getItem(userKey)
-			const userData = JSON.parse(json)
-			this.$store.commit('setUser', null)
+      const json = localStorage.getItem(userKey);
+      const userData = JSON.parse(json);
+      this.$store.commit("setUser", null);
 
-			if(!userData) {
-				this.validatingToken = false
-				this.$router.push({ name: 'auth' })
-				return
-			}
+      if (!userData) {
+        this.validatingToken = false;
+        this.$router.push({ name: "auth" });
+        return;
+      }
 
-			const res = await axios.post(`${baseApiUrl}/validateToken`, userData)
+      const res = await axios.post(`${baseApiUrl}/validateToken`, userData);
 
-			if (res.data) {
-				this.$store.commit('setUser', userData)
-				
-				if(this.$mq === 'xs' || this.$mq === 'sm') {
-					this.$store.commit('toggleMenu', false)
-				}
-			} else {
-				localStorage.removeItem(userKey)
-				this.$router.push({ name: 'auth' })
-			}
+      if (res.data) {
+        this.$store.commit("setUser", userData);
 
-			this.validatingToken = false
-		}
-	},
-	created() {
-		this.validateToken()
-	}
-}
-  
+        if (this.$mq === "xs" || this.$mq === "sm") {
+          this.$store.commit("toggleMenu", false);
+        }
+      } else {
+        localStorage.removeItem(userKey);
+        this.$router.push({ name: "auth" });
+      }
+
+      this.validatingToken = false;
+    },
+  },
+  created() {
+    this.validateToken();
+  },
+};
 </script>
 
 <style>
@@ -98,14 +98,8 @@ body {
 }
 #app.hide-menu {
   grid-template-areas:
-      "header header"
-      "content content"
-       "footer footer";
-  
-  
-  
-
+    "header header"
+    "content content"
+    "footer footer";
 }
-
-
 </style>
