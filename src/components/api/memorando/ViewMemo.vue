@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     remove() {
-      const id = this.dpto.id;
+      const id = this.memo._id
       axios
         .delete(`${baseApiUrl}/memos/${id}`)
         .then(() => {
