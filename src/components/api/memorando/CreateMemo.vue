@@ -46,8 +46,8 @@
       <!-- Departamento de destino -->
       <b-form-group label="Departamento de destino:" label-for="memo-dpto-email">
         <select class="form-control" id="dpto-email" v-model="memo.to">
-          <option v-for="item in dptos" :key="item.name" :value="item.email">
-            {{ item.email }}
+          <option v-for="item in dptos" :key="item.name" :value="item.dptoemail">
+           Departamento: {{item.name}} [ {{ item.dptoemail }} ]
           </option>
         </select>
       </b-form-group>

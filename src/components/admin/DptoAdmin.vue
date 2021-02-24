@@ -76,7 +76,7 @@ export default {
       fields: [
         { key: "id", label: "ID", sortable: true },
         { key: "name", label: "Nome", sortable: true },
-        { key: "email", label: "E-mail", sortable: true },
+        { key: "dptoemail", label: "E-mail", sortable: true },
         { key: "actions", label: "Ações" },
       ],
     };
