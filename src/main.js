@@ -33,32 +33,6 @@ Vue.config.productionTip = false
  */
 
 
-
-const token3 = localStorage.getItem("__rsa_user.token")
-
-const token2 = (localStorage.getItem("__rsa_user"))
-
-const converterToString = []
-
-converterToString.push(token2)
-
-const jsonConverter = JSON.stringify(converterToString)
-
-
-
-console.log(typeof(jsonConverter));
-
-console.log(`AQUI TEM UM converterToString :  ${converterToString}`);
-
-console.log(`AQUI TEM UM JSONCONVERTER :  ${jsonConverter}`);
-
-console.log(`o token é: ${token2}`);
-
-
-if (token3) {
-    axios.defaults.headers.common['Authorization'] = token3
-    window.location = '/'
-}
 new Vue({
     vuetify,
     store,
