@@ -15,8 +15,8 @@
         <span v-html="formatterHtml.value"></span>
       </template>
 
-      <template slot="cell(actions)">
-        <b-button variant="danger" @click="remove" v-if="user.admin">
+      <template slot="cell(actions)" slot-scope="data">
+        <b-button variant="danger" @click="remove(data.item)" v-if="user.admin">
           <i class="fa fa-trash"></i>
         </b-button>
       </template>
@@ -60,8 +60,9 @@ export default {
     };
   },
   methods: {
-    remove() {
-      const id = this.memo._id
+    remove(memo) {
+      this.memo = {...memo}
+      const id = memo._id;
       axios
         .delete(`${baseApiUrl}/memos/${id}`)
         .then(() => {

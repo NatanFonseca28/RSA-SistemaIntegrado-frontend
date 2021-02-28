@@ -44,10 +44,17 @@
       <!--/ Autor memorando -->
 
       <!-- Departamento de destino -->
-      <b-form-group label="Departamento de destino:" label-for="memo-dpto-email">
+      <b-form-group
+        label="Departamento de destino:"
+        label-for="memo-dpto-email"
+      >
         <select class="form-control" id="dpto-email" v-model="memo.to">
-          <option v-for="item in dptos" :key="item.name" :value="item.dptoemail">
-           Departamento: {{item.name}} [ {{ item.dptoemail }} ]
+          <option
+            v-for="item in dptos"
+            :key="item.name"
+            :value="item.dptoemail"
+          >
+            Departamento: {{ item.name }} [ {{ item.dptoemail }} ]
           </option>
         </select>
       </b-form-group>
@@ -69,7 +76,7 @@
 
       <!-- /Conteúdo -->
 
-      <b-button variant="primary" v-if="mode === 'save'" @click="save"
+      <b-button variant="primary" v-if="mode === 'save'" @click="sendmail()"
         >Salvar</b-button
       >
       <b-button variant="danger" v-if="mode === 'remove'" @click="remove"
@@ -131,6 +138,26 @@ export default {
         .catch(showError);
     },
 
+    sendmail(to, subtitle) {
+      axios
+        .post(`${baseApiUrl}/send-mail`)
+        .then(() => {
+          this.$toasted.global.defaultSuccess();
+          this.reset();
+        })
+        .catch(showError);
+    },
+
+    /*     sendmail() {
+      const method = "post";
+      axios[method](`${baseApiUrl}/send-mail`)
+        .then((_) => {
+          this.$toasted.global.defaultSuccess("Email Enviado!");
+        })
+        .catch(showError);
+    },
+ */
+
     /* -------------------------------------------------------------------------- */
     /*                          Função enviar e-mail aqui                         */
     /* -------------------------------------------------------------------------- */
@@ -147,7 +174,7 @@ export default {
     loadDptos() {
       const url = `${baseApiUrl}/dpto`;
       axios.get(url).then((res) => {
-        this.dptos = res.data
+        this.dptos = res.data;
       });
     },
     loadDpto(dpto, mode = "save") {

@@ -17,7 +17,6 @@ import 'mdbvue/lib/css/mdb.min.css'
 
 
 import App from './App'
-import axios from 'axios'
 import './config/bootstrap'
 import './config/msgs'
 import './config/axios'

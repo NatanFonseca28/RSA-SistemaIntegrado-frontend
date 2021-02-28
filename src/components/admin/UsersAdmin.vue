@@ -196,6 +196,7 @@ export default {
     },
     remove() {
       const id = this.user.id;
+      console.log(`${id}`);
       axios
         .delete(`${baseApiUrl}/users/${id}`)
         .then(() => {
