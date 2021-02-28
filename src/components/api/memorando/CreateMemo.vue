@@ -138,7 +138,8 @@ export default {
         .catch(showError);
     },
 
-    sendmail(to, subtitle) {
+    sendmail(to, subtitle, content) {
+      this.memo = req.
       axios
         .post(`${baseApiUrl}/send-mail`)
         .then(() => {
