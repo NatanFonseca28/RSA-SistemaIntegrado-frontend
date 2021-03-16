@@ -138,26 +138,15 @@ export default {
         .catch(showError);
     },
 
-    sendmail(to, subtitle, content) {
-      this.memo = req.
-      axios
-        .post(`${baseApiUrl}/send-mail`)
+    sendmail() {
+      const method = this.memo.id ? "put" : "post";
+      this.memo = axios[method](`${baseApiUrl}/send-mail`, this.memo)
         .then(() => {
           this.$toasted.global.defaultSuccess();
           this.reset();
         })
         .catch(showError);
     },
-
-    /*     sendmail() {
-      const method = "post";
-      axios[method](`${baseApiUrl}/send-mail`)
-        .then((_) => {
-          this.$toasted.global.defaultSuccess("Email Enviado!");
-        })
-        .catch(showError);
-    },
- */
 
     /* -------------------------------------------------------------------------- */
     /*                          Função enviar e-mail aqui                         */
