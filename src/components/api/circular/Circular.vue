@@ -6,14 +6,14 @@
       sub="Sistema unificado"
     />
 
-    <div class="memorando-page">
+    <div class="circular-page">
       <b-card no-body>
         <b-tabs card>
-          <b-tab title="Memorando" active>
-            <ViewMemo />
+          <b-tab title="Circulares">
+            <ViewCircular />
           </b-tab>
-          <b-tab title="Criar Memorando" active>
-            <CreateMemo />
+          <b-tab title="Criar circular" active>
+            <CreateCircular />
           </b-tab>
         </b-tabs>
       </b-card>
@@ -23,11 +23,14 @@
 
 <script>
 import PageTitle from "../../template/PageTitle";
+import CreateCircular from "./CreateCircular";
+import ViewCircular from "./ViewCircular";
+import { mapState } from "vuex";
 
 export default {
-  
   name: "Home",
-  components: { PageTitle },
+  computed: mapState(["user"]),
+  components: { PageTitle, ViewCircular, CreateCircular },
 };
 </script>
 

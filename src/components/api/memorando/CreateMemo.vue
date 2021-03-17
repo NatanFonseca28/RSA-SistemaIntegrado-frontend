@@ -76,7 +76,7 @@
 
       <!-- /Conteúdo -->
 
-      <b-button variant="primary" v-if="mode === 'save'" @click="sendmail()"
+      <b-button variant="primary" v-if="mode === 'save'" @click="save();sendmail()"
         >Salvar</b-button
       >
       <b-button variant="danger" v-if="mode === 'remove'" @click="remove"

@@ -7,7 +7,7 @@
     <b-table
       hover
       striped
-      :items="memos"
+      :items="circs"
       :fields="fields"
       class="tableMemo my-custom-scrollbar"
     >
@@ -36,14 +36,14 @@ import { VueEditor } from "vue2-editor";
 import { mapState } from "vuex";
 
 export default {
-  name: "MemoView",
+  name: "CircularView",
   components: { VueEditor },
-  computed: mapState(["Memo", "user"]), //Carrega todos os dados do objeto "User" e "Memo"
+  computed: mapState(["Circ", "user"]), //Carrega todos os dados do objeto "User" e "Memo"
   data: function () {
     return {
       mode: "save",
-      memo: {},
-      memos: [],
+      circ: {},
+      circs: [],
       users: [],
       page: 1,
       limit: 0,
@@ -60,35 +60,35 @@ export default {
     };
   },
   methods: {
-    remove(memo) {
-      this.memo = {...memo}
-      const id = memo._id;
+    remove(circ) {
+      this.circ = {...circ}
+      const id = circ._id;
       axios
-        .delete(`${baseApiUrl}/memos/${id}`)
+        .delete(`${baseApiUrl}/circs/${id}`)
         .then(() => {
           this.$toasted.global.defaultSuccess();
           this.reset();
         })
         .catch(showError);
     },
-    loadMemos() {
-      const url = `${baseApiUrl}/memos`;
+    loadCircs() {
+      const url = `${baseApiUrl}/circs`;
       axios.get(url).then((res) => {
-        this.memos = res.data;
+        this.circs = res.data;
       });
     },
     reset() {
       this.mode = "save";
-      this.memo = {};
-      this.loadMemos();
+      this.circ = {};
+      this.loadCircs();
     },
-    loadSolicitation(memo, mode = "save") {
+    loadSolicitation(circ, mode = "save") {
       this.mode = mode;
-      this.memo = { ...memo };
+      this.circ = { ...circ };
     },
   },
   mounted() {
-    this.loadMemos();
+    this.loadCircs();
   },
 };
 </script>
