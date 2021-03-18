@@ -9,7 +9,7 @@
       striped
       :items="circs"
       :fields="fields"
-      class="tableMemo my-custom-scrollbar"
+      class="tableCirc my-custom-scrollbar"
     >
       <template slot="cell(content)" slot-scope="formatterHtml">
         <span v-html="formatterHtml.value"></span>
@@ -100,7 +100,7 @@ export default {
   overflow: auto;
 }
 
-.tableMemo {
-  display: block;
+.tableCirc {
+  display: ;
 }
 </style>
