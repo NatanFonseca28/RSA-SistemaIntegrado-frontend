@@ -100,7 +100,4 @@ export default {
   overflow: auto;
 }
 
-.tableCirc {
-  display: ;
-}
 </style>

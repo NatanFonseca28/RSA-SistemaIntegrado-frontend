@@ -1,17 +1,22 @@
 <template>
+
+<!-- Area de Login -->
     <div class="auth-content">
         <div class="auth-modal">
             <img src="@/assets/Icones/iconLogoAuth.png" class="logoAuth" width="" alt="Logo" />
             <img src="@/assets/Icones/RSAicon-type2.png" class="logorsa" width="" alt="Logo" /> 
         <hr>
             <div class="auth-title"> Login </div>
-            <input v-model="user.nickname" name="nickname" type="text" placeholder="Nome de usuário" v-on:keyup.enter="signin">
-            <input v-model="user.password" name="password" type="password" placeholder="Senha" v-on:keyup.enter="signin">
+            <input class="nickname" v-model="user.nickname" name="nickname" type="text" placeholder="Nome de usuário" v-on:keyup.enter="signin">
+            <input class="pass" v-model="user.password" name="password" type="password" placeholder="Senha" v-on:keyup.enter="signin">
 
 
-            <button @click="signin">Entrar</button>
+            <button class="login" @click="signin">Entrar</button>
+            <!-- @click chama a função JS signin -->
         </div>
     </div>  
+    <!--/ Area de Login -->
+
 </template>
 
 <script>
@@ -30,6 +35,7 @@ export default {
         signin() {
             axios.post(`${baseApiUrl}/signin`, this.user)
                 .then(res => {
+                    /* Captura informações presentes na store do navegador e incorpora na localStorage */
                     this.$store.commit('setUser', res.data)
                     localStorage.setItem(userKey, JSON.stringify(res.data))
                     this.$router.push({ path: '/' })
